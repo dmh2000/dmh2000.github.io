@@ -1,0 +1,135 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    text-align : center;
+}
+
+.jtext {
+    text-align: justify;
+}
+.white-bg {
+    background : rgba(255,255,255,0.4)
+}
+
+.red-bg {
+    background : rgba(255,0,0,0.4)
+}
+
+.blue-bg {
+    background : rgba(0,0,255,0.4)
+}
+
+.div-border {
+    border-color:black;
+    border-width: 1px;
+}
+
+hr {
+    height: 6px;
+    border: 0;
+    box-shadow: inset 0 6px 6px -6px black;
+}
+.ul-spaced {
+    padding: 5px;
+}
+
+.cnew {
+    font-family : monospace;
+}
+
+.bit {
+    display:inline-block;
+    width:8px;
+    text-align:center;
+    padding:2px;
+    margin:2px;
+}
+
+.divider {
+    display:inline-block;
+    border-left:thin black solid;
+    border-right:thin black solid;
+}
+
+.colx {
+    background-color: lightgray;
+}
+
+.colc {
+    background-color: white;
+}
+
+.colv {
+    background-color: lightgreen;
+}
+
+.cola {
+    background-color: lemonchiffon;
+}
+
+.txt {
+    text-align:center;
+}
+
+.ctr {
+    text-align:center;
+}
+
+.nib {
+    text-align:center;
+    background-color:lightcyan;
+}
+
+/* reset the container to non-responsive */
+.container {
+    width:970px !important;
+    max-width: none !important;
+}
+
+.vsp {
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+.ms {
+    font-family:monospace;
+}
+
+.result {
+    padding-left:14px;
+}
+
+.vpad {
+    padding-top: 5px;
+}
+
+.gborder {
+    border-style: solid;
+    border-color: green;
+}
+
+.code {
+    text-align:left;
+    color:black;
+    font-size:x-small;
+}
+
+.ctr-large {
+    font-size:large;
+    text-align:center;
+    padding-top : 4px;
+    margin:4px;
+}
+
+#term1.ng-invalid {
+    border-style: solid;
+    border-color:red;
+}
+
+#term2.ng-invalid {
+    border-style: solid;
+    border-color:red;
+}
+
+#calc-help {
+
+}

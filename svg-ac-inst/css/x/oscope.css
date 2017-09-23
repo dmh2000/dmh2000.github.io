@@ -1,0 +1,74 @@
+body {
+  padding: 50px;
+  font: 14px "Courier New", Courier,monospace;
+  background-color: #D2E0E6;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.oscope-canvas {
+}
+
+.row {
+  background-color: #D2E0E6;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.w100 {
+  position:relative;
+  margin-top:6px;
+  margin-bottom:6px;
+  width: 100%;
+}
+
+.w50 {
+  width: 50%;
+  margin-top:1px;
+  margin-bottom:1px;
+}
+
+.tcenter {
+  text-align: center;
+}
+
+.btn-margin {
+  margin-top:4px;
+  margin-bottom: 2px;
+}
+.control-margin {
+  margin-bottom:20px;
+  margin-top:20px;
+}
+
+.outline {
+  padding:2px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.header-cont {
+  width:100%;
+  position:fixed;
+  top:0px;
+}
+
+.small-text {
+  font-size:xx-small;
+}
+
+fieldset {
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
+  padding:16px;
+}
