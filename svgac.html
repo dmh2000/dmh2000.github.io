@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+    .blackBk {
+      background-color:black;
+    }
+    .grayBk {
+      background-color: gray;
+    }
+    .whiteBk {
+      background-color: white;
+    }
+    .header2 {
+      text-align: center;
+    }
+  </style>
+  <script src="svg-ac-inst/js/svg-ac-inst.min.js"></script>
+
+  <!-- flight data recorded in a helicopter -->
+  <script src="svg-ac-inst/js/lr.js"></script>
+
+</head>
+<body>
+<div id='panel' class='container grayBk'>
+  <div class="row">
+    <div class="col-md-12 col-xs-12 header2">
+    <h2><a href="/">dmh2000.github.io</a> SVG Aircraft Instruments</h2>
+      <p>A javscript module that generates svg images of aircraft instruments on the client side, and provides
+      an api for manipulating the instruments.</p>
+      <p>Resize Me, I'm Responsive!</p>
+    </div>
+  </div>
+  <div class="row">
+    <div id="a1" class="grayBk col-md-4 col-xs-4">
+      <!-- airspeed.svg -->
+    </div>
+    <div id='a2' class="grayBk col-md-4 col-xs-4">
+      <!-- attitude.svg -->
+    </div>
+    <div id='a3' class="grayBk col-md-4 col-xs-4">
+      <!-- altimeter.svg -->
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div id="b1" class="grayBk col-md-4 col-xs-4">
+      <!-- turn.svg -->
+    </div>
+    <div id='b2' class="grayBk col-md-4 col-xs-4">
+      <!-- heading.svg -->
+    </div>
+    <div id='b3' class="grayBk col-md-4 col-xs-4">
+      <!-- vsi.svg -->
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row whiteBk">
+    <div class="col-md-12 col-xs-12">
+      <p>This is a browser driven demo of SVG Aircraft Instruments. This page has a big (~1M) upload of flight data taken from a helicopter flight
+        that is used to drive the instruments so if it loaded slowly that's why. If you are using the module you can set the
+        instrument parameters using whatever data is required.
+      </p>
+      </div>
+    </div>
+
+  <div class="row whiteBk">
+    <div class="col-md-3 col-xs-3"><a href="https://github.com/dmh2000/svg-ac-instruments">The Repo</a></div>
+    <div class="col-md-3 col-xs-3"><a href="svg-ac-inst/doc/index.html">The API Documentation</a></div>
+  </div>
+</div>
+
+
+
+<script>
+  var module = (function() {
+
+    // instantiate the airspeed indicator, give it the name that matches the template
+    var airspeed_options =
+    {
+      range  : 220,        // range index, 1 = 220
+      green  :[80,140],  // green arc from clean stall to max cruise
+      yellow :[140,160], // yellow arc from max cruise to never-exceed
+      red    :160, // red arc from never-exceed to never-exceed
+      white  :[50,100]   // white arc for stall-flaps to max-flaps
+    }
+    var airspeed = svg_ac_inst.Airspeed(document.querySelector("#a1"),"gg145-airspeed",true,airspeed_options);
+
+    //  instantiate the attitude indicator, give it the name that matches the template -->
+    var attitude = svg_ac_inst.Attitude(document.querySelector('#a2'),"gg145-attitude",true);
+
+    // instantiate the altimeter, give it the name that matches the template -->
+    var altimeter = svg_ac_inst.Altimeter(document.querySelector("#a3"),"gg145-altimeter",true);
+    altimeter.setPressure(29.92);
+
+    // instantiate the turn coordinator, give it the name that matches the template -->
+    var turn = svg_ac_inst.Turn(document.querySelector('#b1'),"gg145-turn",true);
+
+    // instantiate the heading indicator, give it the name that matches the template -->
+    var heading = svg_ac_inst.Heading(document.querySelector("#b2"),"gg145-heading",true);
+
+    // instantiate the VSI, give it the name that matches the template -->
+    var vsi = svg_ac_inst.VSI(document.querySelector("#b3"),"gg145-vsi",true);
+
+    var index      = 0;
+    var turn_rate  = 0;
+    var turn_alpha = 0.01;
+    function run(timestamp) {
+      // flight1 is the recorded flight data from lr.js (see above)
+      var a = flight1[index];
+
+      turn_rate = turn_rate + ((a[4] - turn_rate) * turn_alpha);
+      attitude.set(a[1],-a[2]);
+      heading.set(a[3]);
+      turn.set(turn_rate,a[5]);
+      altimeter.set(a[6]);
+      airspeed.set(a[7]* (3600/6076));
+      vsi.set(-a[8] * 60);
+
+      index++;
+      if (index >= flight1.length) {
+        index = 0;
+      }
+
+      // start gauges running
+      requestAnimationFrame(run);
+    }
+
+    var cols = ['a1','a2','a3','b1','b2','b3'];
+    var img  = [airspeed,attitude,altimeter,turn,heading,vsi];
+    function ready() {
+      var elements = [];
+      cols.forEach(function(v,i,a) {
+        var e = $('#' + v);
+        elements.push({div:e,svg:img[i]});
+      })
+      return elements;
+    }
+
+    function resize(elements) {
+      elements.forEach(function(v,i,a) {
+        var d = v.div;
+        var s = v.svg;
+        var w = d.width();
+        s.resize(w);
+      });
+    }
+
+    return {
+      resize : resize,
+      ready  : ready,
+      run    : run
+    };
+  })();
+
+  $(document).ready(function() {
+    var elements = module.ready();
+    module.resize(elements);
+    $(window).on('resize',function() {
+      module.resize(elements);
+    });
+
+    // start sim
+    requestAnimationFrame(module.run);
+  });
+
+</script>
+</body>
+</html>
