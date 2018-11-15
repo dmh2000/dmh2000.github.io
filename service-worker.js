@@ -2,8 +2,6 @@ var dataCacheName = 'dmh2000-github.io';
 var cacheName = 'dmh2000-github.io';
 var filesToCache = [
   '/',
- "./images",
- "./images/icons",
  "./images/icons/icon-128x128.png",
  "./images/icons/icon-144x144.png",
  "./images/icons/icon-152x152.png",
