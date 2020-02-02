@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>dmh2000's Math Symbol Grabber</title>
+    <style>
+      .wrapper {
+        display: grid;
+        grid-template-columns: 12rem 2rem 12rem 2rem 12rem 2rem;
+        grid-gap: 2px;
+      }
+      div.input {
+        padding: 10px 0px 10px 0px;
+        text-align: left;
+      }
+      div.label {
+        text-align: right;
+        font-size: large;
+        padding: 4px;
+        border: solid 1px black;
+      }
+      .input {
+        font-size: large;
+        border: solid 1px black;
+      }
+
+      textarea.symbol {
+        resize: none;
+        font-size: large;
+        overflow: hidden;
+        text-align: center;
+        border: solid 1px black;
+      }
+      .container {
+        margin: 0 auto;
+        width: 1024px;
+      }
+      .label {
+        padding-left: 10px;
+      }
+      .type-here {
+        padding: 10px 10px 10px 0;
+      }
+      .text {
+        padding: 8px;
+      }
+      .hdr {
+        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+      }
+      p {
+        margin: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hdr">
+        dmh2000's Math Symbol Grabber
+      </div>
+      <div class="text">
+        <p>
+          I was taking notes in a math class and found it difficult to type in
+          symbols such as Greek letters, operators etc. It was tedious to open a
+          web page or pdf, find the symbol, copy it and enter it in my notes. So
+          I threw together this page that tries to make it a bit easier to find
+          and grab some common math symbols. (I was using a normal text editor,
+          not Latex). The copied symbols are utf-8 encoded.
+        </p>
+        <p>
+          To use this page, just type in a few letters describing what you want
+          and it will pop up any matching symbols. The symbols are displayed in
+          a textarea so you just need to double click on it and it should select
+          it for copying. You can also tab to the desired symbol, ctrl-a to
+          select and ctrl-c to copy if you hate using the mouse.
+        </p>
+        <p>
+          Examples : 'arrow', 'e', 'ep', 'diff','floor'
+        </p>
+      </div>
+      <div class="type-here">
+        <input
+          class="input"
+          type="text"
+          id="inputName"
+          maxlength="20"
+          size="19"
+        />
+        <span class="label">Type here to lookup symbols</span>
+      </div>
+      <div class="wrapper" id="nameList"></div>
+    </div>
+    <script src="sym.js"></script>
+  </body>
+</html>
