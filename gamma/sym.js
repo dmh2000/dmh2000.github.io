@@ -48,11 +48,13 @@ const symbols = [
   { chi: "χ" },
   { psi: "ψ" },
   { omega: "ω" },
-  // operators and other symbols
-  { lt: "<" },
-  { gt: ">" },
-  { le: "≤" },
-  { ge: "≥" },
+  // operators
+  { equal: "=" },
+  { approximate: "≈" },
+  { less_than_lt: "<" },
+  { greate_than_gt: ">" },
+  { less_equal_le: "≤" },
+  { greater_equal_ge: "≥" },
   { plus_minus: "±" },
   { ne: "≠" },
   { div: "÷" },
@@ -60,6 +62,10 @@ const symbols = [
   { minus: "−" },
   { square_root: "√" },
   { cube_root: "∛" },
+  { vector_sum: "⊕" },
+  { vector_product: "⊗" },
+  // other symbols
+  { e: "e" },
   { infinity: "∞" },
   { function: "ƒ" },
   { double_prime: "″" },
@@ -72,15 +78,21 @@ const symbols = [
   { right_ceiling: "⌉" },
   { left_floor: "⌊" },
   { right_floor: "⌋" },
-  { vector_sum: "⊕" },
-  { vector_product: "⊗" },
   { integral: "∫" },
+  { double_integral: "∬" },
+  { triple_integral: "∭" },
   { partial_differential: "∂" },
   { increment: "Δ" },
   { nabla: "∇" },
-  { cap: "∩" },
+
+  // annotations
+  { intersection: "⋂" },
+  { union: "⋃" },
+  { subset: "⊆" },
+  { superset: "⊇" },
+  { empty_set: "Ø" },
+  { suchthat: "|" },
   { mp: "∓" },
-  { cup: "∪" },
   { times: "×" },
   { div: "÷" },
   { asterisk: "∗" },
@@ -140,12 +152,13 @@ function showSymbols(e) {
   nameList.innerHTML = list;
 }
 
-const inputName = document.getElementById("inputName");
+const inputSymbol = document.getElementById("inputSymbol");
 const nameList = document.getElementById("nameList");
-inputName.addEventListener("input", showSymbols);
+inputSymbol.addEventListener("input", showSymbols);
 empty = {
   target: {
     value: ""
   }
 };
 showSymbols(empty);
+inputSymbol.focus();
